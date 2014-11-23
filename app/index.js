@@ -41,6 +41,9 @@ var NastyGenerator = yeoman.generators.Base.extend({
       this.angularAppName = props.angularAppName;
       this.appDescription = props.appDescription;
       this.hasFrontend = props.hasFrontend;
+      this.config.set({
+        app: props
+      });
       done();
     }.bind(this));
   },
@@ -80,6 +83,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
   },
 
   end: function () {
+    this.config.save();
     var log = this.log;
     this.installDependencies(function() {
       log('All done! Now you can start your app by running gulp');
