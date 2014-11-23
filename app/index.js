@@ -10,7 +10,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
   },
 
   prompting: function () {
-    var done = this.async();
+    var done = this.async(), slugify = this._.slugify;
 
     // Have Yeoman greet the user.
     this.log(yosay(
@@ -18,36 +18,72 @@ var NastyGenerator = yeoman.generators.Base.extend({
     ));
 
     var prompts = [{
+      name: 'appName',
+      message: 'Your application name please?'
+    },{
+      name: 'angularAppName',
+      message: 'Your angular application name please?',
+      default: function(answers) {
+        return slugify(answers.appName);
+      }
+    },{
+      name: 'appDescription',
+      message: 'Your application description please?'
+    },{
+      name: 'hasFrontend',
+      message: 'Does the app have a frontend or is it just a REST API?',
       type: 'confirm',
-      name: 'someOption',
-      message: 'Would you like to enable this option?',
       default: true
     }];
 
     this.prompt(prompts, function (props) {
-      this.someOption = props.someOption;
-
+      this.appName = props.appName;
+      this.angularAppName = props.angularAppName;
+      this.appDescription = props.appDescription;
+      this.hasFrontend = props.hasFrontend;
       done();
     }.bind(this));
   },
 
   writing: {
     app: function () {
-      this.dest.mkdir('app');
-      this.dest.mkdir('app/templates');
 
-      this.src.copy('_package.json', 'package.json');
-      this.src.copy('_bower.json', 'bower.json');
+      this.mkdir('logs');
+      this.copy('package.json', 'package.json');
+      this.copy('gulpfile.js', 'gulpfile.js');
+      this.copy('cli', 'cli');
+      this.copy('pm2.json', 'pm2.json');
+
+      this.directory('backend', 'backend');
+
+      if (this.hasFrontend) {
+        this.copy('.bowerrc', '.bowerrc');
+        this.copy('bower.json', 'bower.json');
+        this.directory('frontend', 'frontend');
+      }
+
     },
 
     projectfiles: function () {
-      this.src.copy('editorconfig', '.editorconfig');
-      this.src.copy('jshintrc', '.jshintrc');
+      this.copy('.editorconfig', '.editorconfig');
+      this.copy('.gitignore', '.gitignore');
+      this.copy('.htmlhintrc', '.htmlhintrc');
+      this.copy('.jscsrc', '.jscsrc');
+      this.copy('.uncssignore', '.uncssignore');
+      this.copy('README.md', 'README.md');
     }
   },
 
+  installingFailingModules: function() {
+    var done = this.async();
+    this.npmInstall(['mmmagic'], done);
+  },
+
   end: function () {
-    this.installDependencies();
+    var log = this.log;
+    this.installDependencies(function() {
+      log('All done! Now you can start your app by running gulp');
+    });
   }
 });
 

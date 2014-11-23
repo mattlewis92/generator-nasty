@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , fs = require('fs')
+  , programVersion = JSON.parse(fs.readFileSync('package.json')).version
+  , requireAll = require('require-all')
+  , application = require(__dirname + '/backend/application');
+
+var app = new application();
+var services = app.loadServices(__dirname + '/backend/services', __dirname + '/');
+
+program.version(programVersion);
+
+var commands = requireAll(__dirname + '/backend/commands');
+for (var folder in commands) {
+
+  for (var command in commands[folder]) {
+    var suggestedName = folder + ':' + command; //allows the command to optionally add <param>
+    commands[folder][command](program, services, suggestedName);
+  }
+
+}
+
+var args = process.argv;
+if (args.length == 2) {
+  args.push('--help');
+}
+
+program.parse(args);

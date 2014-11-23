@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" id="ng-app" ng-app="<%= _.slugify(angularAppName) %>">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <title translate="APP_NAME"></title>
+
+    <base href="/">
+
+    <!--[if lt IE 10]>
+      <script type="text/javascript">
+        (function() {
+          //Base tag fix
+          var baseTag = document.getElementsByTagName('base')[0];
+          baseTag.href = baseTag.href;
+
+          //console.log polyfill
+          if (!window.console) {
+            window.console = {};
+          }
+          // union of Chrome, FF, IE, and Safari console methods
+          var m = [
+            "log", "info", "warn", "error", "debug", "trace", "dir", "group",
+            "groupCollapsed", "groupEnd", "time", "timeEnd", "profile", "profileEnd",
+            "dirxml", "assert", "count", "markTimeline", "timeStamp", "clear"
+          ];
+
+          // define undefined methods as noops to prevent errors
+          for (var i = 0; i < m.length; i++) {
+            if (!window.console[m[i]]) {
+              window.console[m[i]] = function() {};
+            }
+          }
+
+        })();
+      </script>
+    <![endif]-->
+
+    <!--[if lt IE 9]>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-shim.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.0.3/es5-sham.min.js"></script>
+      <script src="//oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- bower:css -->
+    <!-- endinject -->
+
+    <!-- inject:css -->
+    <!-- endinject -->
+
+  </head>
+  <body>
+
+    <div class="splash text-center" ng-cloak>
+      <i class="fa fa-spin fa-spinner fa-5x"></i>
+    </div>
+
+    <navbar></navbar>
+
+    <div class="container">
+
+      <loading-box>
+        <div flash-message="http"></div>
+        <ui-view></ui-view>
+      </loading-box>
+
+    </div>
+
+    <script src="//cdn.polyfill.io/v1/polyfill.min.js"></script>
+
+    <!-- bower:js -->
+    <!-- endinject -->
+
+    <!-- inject:js -->
+    <!-- endinject -->
+
+    <script>
+      window.exceptions.handler.reportPost({url: '/api/v1/app/report_error'});
+    </script>
+
+  </body>
+</html>
