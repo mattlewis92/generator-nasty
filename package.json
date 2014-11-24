@@ -1,10 +1,10 @@
 {
   "name": "generator-nasty",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Yeoman generator",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "mattlewis92/generator-nasty",
+  "repository": "git@github.com:mattlewis92/generator-nasty.git",
   "author": {
     "name": "Matt Lewis",
     "email": "",

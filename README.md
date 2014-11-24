@@ -1,9 +1,14 @@
-# generator-nasty [![Build Status](https://secure.travis-ci.org/mattlewis92/generator-nasty.png?branch=master)](https://travis-ci.org/mattlewis92/generator-nasty)
+# generator-nasty
 
 > [Yeoman](http://yeoman.io) generator
 
-
 ## Getting Started
+
+### What is nasty?
+
+Nasty is an opinionated set of MEAN boilerplate code ideal for starting a new project. This repo contains the yeoman generators for easy scaffolding of new code.
+
+More info on nasty here: https://github.com/mattlewis92/nasty
 
 ### What is Yeoman?
 
