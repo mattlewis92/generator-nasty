@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * @api {<%= httpMethod %>} <%= actionPath.replace('/api/v1', '') %> <%= apiDescription %>
+ * @api {<%= httpMethod %>} <%= routePrefix.replace('/api/v1', '') %><%= actionPath %> <%= apiDescription %>
  * @apiName <%= apiName %>
  * @apiGroup <%= apiGroup %>
  *
