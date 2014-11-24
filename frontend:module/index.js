@@ -11,7 +11,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the module name?'
+      message: 'What is the module name?',
+      validate: function(input) {
+        return !!input;
+      }
     }];
 
     this.prompt(prompts, function (props) {

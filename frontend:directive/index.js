@@ -1,10 +1,6 @@
 'use strict';
-var util = require('util');
+var util = require('../util');
 var yeoman = require('yeoman-generator');
-
-function capitaliseFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 var NastyGenerator = yeoman.generators.Base.extend({
 
@@ -14,10 +10,15 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the module name?'
+      message: 'What is the module name?',
+      type: 'list',
+      choices: util.getFrontendModuleList(process.cwd())
     }, {
       name: 'directiveName',
-      message: 'What is the directive name? (in camel case)'
+      message: 'What is the directive name? (in camel case)',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'hasTemplate',
       message: 'Does the directive require a template?',
@@ -40,7 +41,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       for (var key in props) {
         this[key] = props[key];
       }
-      this.controllerName = capitaliseFirstLetter(this.moduleName) + capitaliseFirstLetter(this.directiveName) + 'Ctrl';
+      this.controllerName = util.capitaliseFirstLetter(this.moduleName) + util.capitaliseFirstLetter(this.directiveName) + 'Ctrl';
       done();
     }.bind(this));
 

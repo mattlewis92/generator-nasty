@@ -11,10 +11,16 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'folder',
-      message: 'What folder should the middleware be placed in?'
+      message: 'What folder should the middleware be placed in?',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'middlewareName',
-      message: 'What is the name of the middleware?'
+      message: 'What is the name of the middleware?',
+      validate: function(input) {
+        return !!input;
+      }
     }];
 
     this.prompt(prompts, function (props) {

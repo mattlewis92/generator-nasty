@@ -1,5 +1,5 @@
 'use strict';
-var util = require('util');
+var util = require('../util');
 var yeoman = require('yeoman-generator');
 
 
@@ -11,10 +11,15 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the module name?'
+      message: 'What is the module name?',
+      type: 'list',
+      choices: util.getFrontendModuleList(process.cwd())
     }, {
       name: 'serviceName',
-      message: 'What is the service name?'
+      message: 'What is the service name?',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'serviceType',
       message: 'What is the type of service?',

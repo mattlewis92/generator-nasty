@@ -1,10 +1,6 @@
 'use strict';
-var util = require('util');
+var util = require('../util');
 var yeoman = require('yeoman-generator');
-
-function capitaliseFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 
 var NastyGenerator = yeoman.generators.Base.extend({
@@ -15,13 +11,22 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'routePrefix',
-      message: 'What is the prefix of the route? e.g. /api/v1/user'
+      message: 'What is the prefix of the route? e.g. /api/v1/user',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'actionPath',
-      message: 'What is the action path of the route? e.g. /update'
+      message: 'What is the action path of the route? e.g. /update',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'actionName',
-      message: 'What is the action name? e.g. updateUser'
+      message: 'What is the action name? e.g. updateUser',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'httpMethod',
       message: 'What is the HTTP method?',
@@ -34,7 +39,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
       ]
     }, {
       name: 'apiDescription',
-      message: 'What is the description of the route?'
+      message: 'What is the description of the route?',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'submodule',
       message: 'If a submodule, what is it? (Or just leave blank)'
@@ -44,8 +52,8 @@ var NastyGenerator = yeoman.generators.Base.extend({
       for (var key in props) {
         this[key] = props[key];
       }
-      this.apiName = capitaliseFirstLetter(props.actionName);
-      this.apiGroup = capitaliseFirstLetter(props.routePrefix.split('/').pop());
+      this.apiName = util.capitaliseFirstLetter(props.actionName);
+      this.apiGroup = util.capitaliseFirstLetter(props.routePrefix.split('/').pop());
       done();
     }.bind(this));
 

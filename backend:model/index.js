@@ -11,7 +11,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'modelName',
-      message: 'What is the name of the model?'
+      message: 'What is the name of the model?',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'isTimestampable',
       message: 'Is the model timestampable?',

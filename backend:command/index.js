@@ -11,13 +11,22 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'namespace',
-      message: 'What is the namespace of the command?'
+      message: 'What is the namespace of the command?',
+      validate: function(input) {
+        return !!input;
+      }
     },{
       name: 'commandName',
-      message: 'What is the command name?'
+      message: 'What is the command name?',
+      validate: function(input) {
+        return !!input;
+      }
     },{
       name: 'commandDescription',
-      message: 'Your command description please?'
+      message: 'Your command description please?',
+      validate: function(input) {
+        return !!input;
+      }
     }];
 
     this.prompt(prompts, function (props) {

@@ -1,10 +1,6 @@
 'use strict';
-var util = require('util');
+var util = require('../util');
 var yeoman = require('yeoman-generator');
-
-function capitaliseFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 var NastyGenerator = yeoman.generators.Base.extend({
 
@@ -14,13 +10,21 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'moduleName',
-      message: 'What is the module name?'
+      message: 'What is the module name?',
+      type: 'list',
+      choices: util.getFrontendModuleList(process.cwd())
     }, {
       name: 'stateName',
-      message: 'What is the state name?'
+      message: 'What is the state name?',
+      validate: function(input) {
+        return !!input;
+      }
     }, {
       name: 'url',
-      message: 'What is the url, relative to the parent state?'
+      message: 'What is the url, relative to the parent state?',
+      validate: function(input) {
+        return !!input;
+      }
     }];
 
     this.prompt(prompts, function (props) {
@@ -28,7 +32,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       this.stateName = props.stateName;
       this.url = props.url;
       this.angularAppName = this.config.get('app').angularAppName;
-      this.controllerName = capitaliseFirstLetter(this.moduleName) + capitaliseFirstLetter(this.stateName) + 'Ctrl';
+      this.controllerName = util.capitaliseFirstLetter(this.moduleName) + util.capitaliseFirstLetter(this.stateName) + 'Ctrl';
       done();
     }.bind(this));
 

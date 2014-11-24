@@ -11,10 +11,16 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'namespace',
-      message: 'What is the namespace of the worker?'
+      message: 'What is the namespace of the worker?',
+      validate: function(input) {
+        return !!input;
+      }
     },{
       name: 'workerName',
-      message: 'What is the worker name?'
+      message: 'What is the worker name?',
+      validate: function(input) {
+        return !!input;
+      }
     },{
       name: 'workerFrequency',
       message: 'What frequency should the worker run at?'

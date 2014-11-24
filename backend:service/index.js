@@ -11,10 +11,16 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var prompts = [{
       name: 'namespace',
-      message: 'What is the namespace of the service?'
+      message: 'What is the namespace of the service?',
+      validate: function(input) {
+        return !!input;
+      }
     },{
       name: 'serviceName',
-      message: 'What is the service name?'
+      message: 'What is the service name?',
+      validate: function(input) {
+        return !!input;
+      }
     }];
 
     this.prompt(prompts, function (props) {
