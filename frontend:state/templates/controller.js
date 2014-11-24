@@ -1,7 +1,7 @@
 'use strict';
 
 angular
-  .module('<%= _.slugify(angularAppName) %>.<%= moduleName %>.directives')
+  .module('<%= _.slugify(angularAppName) %>.<%= moduleName %>.states')
   .classy
   .controller({
 
