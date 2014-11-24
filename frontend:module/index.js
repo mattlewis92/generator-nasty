@@ -33,6 +33,13 @@ var NastyGenerator = yeoman.generators.Base.extend({
     this.mkdir(folder + 'states');
     this.copy('states.js', folder + '/states/' + this.moduleName + '.states.js');
 
+    var moduleFile = 'frontend/development/app/module.js';
+    var module = this.dest.read(moduleFile);
+    var mainModuleName = this._.slugify(this.angularAppName);
+    module = module.replace("'" + mainModuleName + ".core',", "'" + mainModuleName + ".core',\n  '" + mainModuleName + "." + this.moduleName + "',");
+
+    this.dest.write(moduleFile, module);
+
   }
 });
 
