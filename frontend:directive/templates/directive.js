@@ -6,7 +6,8 @@ angular
     return {
       restrict: 'EA',<% if (hasTemplate) { %>
       templateUrl: 'app/<%= moduleName %>/directives/<%= directiveName %>/<%= moduleName %>.<%= directiveName %>.template.html',<% } %><% if (hasController) { %>
-      controller: '<%= controllerName %>',<% } %>
+      controller: '<%= controllerName %>',
+      controllerAs: '<%= directiveName %>',<% } %>
       link: function(scope, elm, attrs) {
 
       }
