@@ -5,7 +5,7 @@ angular
   .directive('<%= directiveName %>', function() {
     return {
       restrict: 'EA',<% if (hasTemplate) { %>
-      templateUrl: 'app/<%= moduleName %>/directives/<%= directiveName %>/<%= moduleName %>.<%= directiveName %>.template.html',<% } %><% if (hasController) { %>
+      templateUrl: 'app/<%= moduleName %>/directives/<%= directiveName %>/<%= moduleName %>.<%= directiveName %>.html',<% } %><% if (hasController) { %>
       controller: '<%= controllerName %>',
       controllerAs: '<%= directiveName %>',<% } %>
       link: function(scope, elm, attrs) {

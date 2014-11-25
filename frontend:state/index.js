@@ -46,7 +46,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     this.copy('controller.js', fileBase + '.ctrl.js');
     this.copy('stylesheet.less', fileBase + '.style.less');
-    this.copy('template.html', fileBase + '.template.html');
+    this.copy('template.html', fileBase + '.html');
 
     var stateConfigFile = 'frontend/development/app/' + this.moduleName + '/states/' + this.moduleName + '.states.js';
     var stateConfig = this.dest.read(stateConfigFile);
@@ -55,7 +55,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       "",
       ".state('" + this.moduleName + "." + this.stateName + "', {",
       "  url: '" + this.url + "',",
-      "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".template.html',",
+      "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
       "  controller: '" + this.controllerName + " as " + this.stateName + "'",
       "});"
     ].join('\n      ');

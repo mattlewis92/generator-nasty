@@ -54,7 +54,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
     this.copy('directive.js', folder + this.moduleName + '.' + this.directiveName + '.directive.js');
 
     if (this.hasTemplate) {
-      this.copy('template.html', folder + this.moduleName + '.' + this.directiveName + '.template.html');
+      this.copy('template.html', folder + this.moduleName + '.' + this.directiveName + '.html');
     }
 
     if (this.hasStyle) {
