@@ -68,12 +68,15 @@ var NastyGenerator = yeoman.generators.Base.extend({
     },
 
     projectfiles: function () {
+
       this.copy('.editorconfig', '.editorconfig');
       this.copy('.gitignore', '.gitignore');
       this.copy('.htmlhintrc', '.htmlhintrc');
       this.copy('.jscsrc', '.jscsrc');
+      this.copy('.jshintrc', '.jshintrc');
       this.copy('.uncssignore', '.uncssignore');
       this.copy('README.md', 'README.md');
+
     }
   },
 
