@@ -12,7 +12,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       name: 'moduleName',
       message: 'What is the module name?',
       type: 'list',
-      choices: util.getFrontendModuleList(process.cwd())
+      choices: util.getFrontendModuleList(process.cwd(), this.config)
     }, {
       name: 'directiveName',
       message: 'What is the directive name? (in camel case)',
@@ -49,7 +49,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
   writing: function () {
 
-    var folder = 'frontend/development/app/' + this.moduleName + '/directives/' + this.directiveName + '/';
+    var folder = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/directives/' + this.directiveName + '/';
     this.mkdir(folder);
     this.copy('directive.js', folder + this.moduleName + '.' + this.directiveName + '.directive.js');
 

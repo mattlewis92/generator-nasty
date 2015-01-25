@@ -13,7 +13,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       name: 'moduleName',
       message: 'What is the module name?',
       type: 'list',
-      choices: util.getFrontendModuleList(process.cwd())
+      choices: util.getFrontendModuleList(process.cwd(), this.config)
     }, {
       name: 'filterName',
       message: 'What is the filter name?',
@@ -33,7 +33,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
   writing: function () {
 
-    var folder = 'frontend/development/app/' + this.moduleName + '/filters/';
+    var folder = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/filters/';
     this.mkdir(folder);
     this.copy('filter.js', folder + this.moduleName + '.' + this.filterName + '.filter.js');
 

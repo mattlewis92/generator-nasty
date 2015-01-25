@@ -12,7 +12,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       name: 'moduleName',
       message: 'What is the module name?',
       type: 'list',
-      choices: util.getFrontendModuleList(process.cwd())
+      choices: util.getFrontendModuleList(process.cwd(), this.config)
     }, {
       name: 'stateName',
       message: 'What is the state name?',
@@ -45,7 +45,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
   writing: function () {
 
-    var folder = 'frontend/development/app/' + this.moduleName + '/states/' + this.stateName + '/';
+    var folder = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/states/' + this.stateName + '/';
     this.mkdir(folder);
     var fileBase = folder + this.moduleName + '.' + this.stateName;
 
@@ -53,7 +53,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
     this.copy('stylesheet.less', fileBase + '.style.less');
     this.copy('template.html', fileBase + '.html');
 
-    var stateConfigFile = 'frontend/development/app/' + this.moduleName + '/states/' + this.moduleName + '.states.js';
+    var stateConfigFile = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/states/' + this.moduleName + '.states.js';
     var stateConfig = this.dest.read(stateConfigFile);
 
     var stateToAdd = [
