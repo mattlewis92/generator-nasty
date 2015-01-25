@@ -2,7 +2,7 @@
 
 angular
   .module('<%= _.slugify(angularAppName) %>.<%= moduleName %>.directives')
-  .directive('<%= directiveName %>', function() {
+  .directive('<%= directiveNamePrefixed %>', function() {
     return {
       restrict: 'EA',<% if (hasTemplate) { %>
       templateUrl: 'app/<%= moduleName %>/directives/<%= directiveName %>/<%= moduleName %>.<%= directiveName %>.html',<% } %><% if (hasController) { %>

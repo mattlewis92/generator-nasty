@@ -49,6 +49,11 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
   writing: function () {
 
+    this.directiveNamePrefixed = this.directiveName;
+    if (this.config.get('app').directivePrefix) {
+      this.directiveNamePrefixed = this.config.get('app').directivePrefix + util.capitaliseFirstLetter(this.directiveName);
+    }
+
     var folder = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/directives/' + this.directiveName + '/';
     this.mkdir(folder);
     this.copy('directive.js', folder + this.moduleName + '.' + this.directiveName + '.directive.js');
