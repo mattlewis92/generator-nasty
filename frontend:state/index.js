@@ -32,7 +32,12 @@ var NastyGenerator = yeoman.generators.Base.extend({
       this.stateName = props.stateName;
       this.url = props.url;
       this.angularAppName = this.config.get('app').angularAppName;
-      this.controllerName = util.capitaliseFirstLetter(this.moduleName) + util.capitaliseFirstLetter(this.stateName) + 'Ctrl';
+      var controllerParts = [];
+      controllerParts.push(util.capitaliseFirstLetter(this.moduleName));
+      this.stateName.split('.').forEach(function(part) {
+        controllerParts.push(util.capitaliseFirstLetter(part));
+      });
+      this.controllerName = controllerParts.join('') + 'Ctrl';
       done();
     }.bind(this));
 
@@ -56,11 +61,11 @@ var NastyGenerator = yeoman.generators.Base.extend({
       ".state('" + this.moduleName + "." + this.stateName + "', {",
       "  url: '" + this.url + "',",
       "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
-      "  controller: '" + this.controllerName + " as " + this.stateName + "Ctrl'",
+      "  controller: '" + this.controllerName + " as " + this.stateName.split('.').pop() + "Ctrl'",
       "});"
     ].join('\n      ');
 
-    stateConfig = stateConfig.replace('});', '})' + stateToAdd);
+    stateConfig = stateConfig.replace('      });', '      })' + stateToAdd);
     this.dest.write(stateConfigFile, stateConfig);
 
   }

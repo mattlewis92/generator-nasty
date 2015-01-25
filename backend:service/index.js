@@ -35,7 +35,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
 
     var folder = 'backend/services/' + this.namespace;
     this.mkdir(folder);
-    this.copy('service.js', folder + '/' + this.serviceName + '.js');
+    this.copy('service.js', folder + '/' + this.serviceName + '/index.js');
 
   }
 });
