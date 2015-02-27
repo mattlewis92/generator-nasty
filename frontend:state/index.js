@@ -65,7 +65,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       "});"
     ].join('\n      ');
 
-    stateConfig = stateConfig.replace('      });', '      })' + stateToAdd);
+    stateConfig = util.replaceNthLastOccurenceOf(2, stateConfig, '});', '})' + stateToAdd);
     this.dest.write(stateConfigFile, stateConfig);
 
   }

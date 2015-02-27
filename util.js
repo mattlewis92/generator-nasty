@@ -24,6 +24,15 @@ function getFrontendFolder(config) {
   return config.get('app').frontendFolder || 'frontend/development/app';
 }
 
+function replaceNthLastOccurenceOf(n, str, find, replace) {
+  var pos = str.lastIndexOf(find);
+  for (var i = 1; i < n; i++) {
+    pos = str.lastIndexOf(find, pos - 1);
+  }
+  return str.slice(0, pos) + str.slice(pos).replace(find, replace);
+}
+
 module.exports.capitaliseFirstLetter = capitaliseFirstLetter;
 module.exports.getFrontendModuleList = getFrontendModuleList;
 module.exports.getFrontendFolder = getFrontendFolder;
+module.exports.replaceNthLastOccurenceOf = replaceNthLastOccurenceOf;
