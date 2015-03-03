@@ -70,6 +70,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
       this.copy('controller.js', folder + this.moduleName + '.' + this.directiveName + '.ctrl.js');
     }
 
+  },
+
+  inject: function () {
+    this.spawnCommand('gulp', ['inject']);
   }
 });
 

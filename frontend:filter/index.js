@@ -37,6 +37,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
     this.mkdir(folder);
     this.copy('filter.js', folder + this.moduleName + '.' + this.filterName + '.filter.js');
 
+  },
+
+  inject: function () {
+    this.spawnCommand('gulp', ['inject']);
   }
 });
 

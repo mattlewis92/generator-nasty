@@ -47,6 +47,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
     this.mkdir(folder);
     this.copy(this.serviceType + '.js', folder + this.moduleName + '.' + this.serviceName + '.' + this.serviceType + '.js');
 
+  },
+
+  inject: function () {
+    this.spawnCommand('gulp', ['inject']);
   }
 });
 
