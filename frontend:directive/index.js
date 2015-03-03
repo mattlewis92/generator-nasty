@@ -66,9 +66,10 @@ var NastyGenerator = yeoman.generators.Base.extend({
       this.copy('stylesheet.less', folder + this.moduleName + '.' + this.directiveName + '.style.less');
     }
 
-    if (this.hasController) {
+    //the controller is now done inline
+    /*if (this.hasController) {
       this.copy('controller.js', folder + this.moduleName + '.' + this.directiveName + '.ctrl.js');
-    }
+    }*/
 
   },
 
