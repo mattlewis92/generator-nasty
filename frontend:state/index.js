@@ -30,11 +30,15 @@ var NastyGenerator = yeoman.generators.Base.extend({
       message: 'Does the state require a stylesheet?',
       type: 'confirm',
       default: false
+    }, {
+      name: 'viewName',
+      message: 'What is the view name? (optional)'
     }];
 
     this.prompt(prompts, function (props) {
       this.moduleName = props.moduleName;
       this.stateName = props.stateName;
+      this.viewName = props.viewName;
       this.url = props.url;
       this.angularAppName = this.config.get('app').angularAppName;
       var controllerParts = [];
@@ -63,14 +67,32 @@ var NastyGenerator = yeoman.generators.Base.extend({
     var stateConfigFile = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/states/' + this.moduleName + '.states.js';
     var stateConfig = this.dest.read(stateConfigFile);
 
-    var stateToAdd = [
-      "",
-      ".state('" + this.moduleName + "." + this.stateName + "', {",
-      "  url: '" + this.url + "',",
-      "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
-      "  controller: '" + this.controllerName + " as vm'",
-      "});"
-    ].join('\n      ');
+    var parentStateName = stateConfig.match(/\.state\(\'(.*)', {/)[1];
+
+    if (!this.viewName) {
+      var stateToAdd = [
+        "",
+        ".state('" + parentStateName + "." + this.stateName + "', {",
+        "  url: '" + this.url + "',",
+        "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
+        "  controller: '" + this.controllerName + " as vm'",
+        "});"
+      ].join('\n      ');
+    } else {
+      var stateToAdd = [
+        "",
+        ".state('" + parentStateName + "." + this.stateName + "', {",
+        "  url: '" + this.url + "',",
+        "  views: {",
+        "    '" + this.viewName + "': {",
+        "      templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
+        "      controller: '" + this.controllerName + " as vm'",
+        "    }",
+        "  }",
+        "});"
+      ].join('\n      ');
+    }
+
 
     stateConfig = util.replaceNthLastOccurenceOf(2, stateConfig, '});', '})' + stateToAdd);
     this.dest.write(stateConfigFile, stateConfig);

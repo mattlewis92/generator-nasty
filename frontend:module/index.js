@@ -15,10 +15,14 @@ var NastyGenerator = yeoman.generators.Base.extend({
       validate: function(input) {
         return !!input;
       }
+    }, {
+      name: 'stateParentName',
+      message: 'What is the state parent? (optional)'
     }];
 
     this.prompt(prompts, function (props) {
       this.moduleName = props.moduleName;
+      this.stateParentName = props.stateParentName;
       this.angularAppName = this.config.get('app').angularAppName;
       done();
     }.bind(this));
@@ -26,6 +30,9 @@ var NastyGenerator = yeoman.generators.Base.extend({
   },
 
   writing: function () {
+
+    this.stateParentName = this.stateParentName ? this.stateParentName + '.' : '';
+    this.stateParentTemplate = this.config.get('app').stateParentTemplate || '<ui-view/>';
 
     var folder = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/';
     this.mkdir(folder);

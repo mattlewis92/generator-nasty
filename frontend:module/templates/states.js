@@ -5,10 +5,10 @@ angular
   .config(function($stateProvider) {
 
     $stateProvider
-      .state('<%= moduleName %>', {
+      .state('<%= stateParentName %><%= moduleName %>', {
         url: '/<%= moduleName %>',
         abstract: true,
-        template: '<ui-view/>'
+        template: '<%= stateParentTemplate %>'
       });
 
   });
