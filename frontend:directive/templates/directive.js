@@ -7,7 +7,8 @@ angular
       restrict: 'EA',<% if (hasTemplate) { %>
       templateUrl: 'app/<%= moduleName %>/directives/<%= directiveName %>/<%= moduleName %>.<%= directiveName %>.html',<% } %><% if (hasController) { %>
       controller: '<%= controllerName %>',
-      controllerAs: '<%= directiveName %>Ctrl',<% } %>
+      controllerAs: 'vm',
+      bindToController: true,<% } %>
       link: function(scope, elm, attrs) {
 
       }

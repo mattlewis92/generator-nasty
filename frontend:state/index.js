@@ -61,7 +61,7 @@ var NastyGenerator = yeoman.generators.Base.extend({
       ".state('" + this.moduleName + "." + this.stateName + "', {",
       "  url: '" + this.url + "',",
       "  templateUrl: 'app/" + this.moduleName + "/states/" + this.stateName + "/" + this.moduleName + "." + this.stateName + ".html',",
-      "  controller: '" + this.controllerName + " as " + this.stateName.split('.').pop() + "Ctrl'",
+      "  controller: '" + this.controllerName + " as vm'",
       "});"
     ].join('\n      ');
 
