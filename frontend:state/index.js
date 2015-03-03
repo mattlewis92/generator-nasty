@@ -25,6 +25,11 @@ var NastyGenerator = yeoman.generators.Base.extend({
       validate: function(input) {
         return !!input;
       }
+    }, {
+      name: 'hasStyle',
+      message: 'Does the state require a stylesheet?',
+      type: 'confirm',
+      default: false
     }];
 
     this.prompt(prompts, function (props) {
@@ -50,7 +55,9 @@ var NastyGenerator = yeoman.generators.Base.extend({
     var fileBase = folder + this.moduleName + '.' + this.stateName;
 
     this.copy('controller.js', fileBase + '.ctrl.js');
-    this.copy('stylesheet.less', fileBase + '.style.less');
+    if (this.hasStyle) {
+      this.copy('stylesheet.less', fileBase + '.style.less');
+    }
     this.copy('template.html', fileBase + '.html');
 
     var stateConfigFile = util.getFrontendFolder(this.config) + '/' + this.moduleName + '/states/' + this.moduleName + '.states.js';
